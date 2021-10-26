@@ -3,6 +3,7 @@
 const express = require("express");
 const router = express.Router();
 const fetch = require("node-fetch");
+require('dotenv').config()
 
 
 // completely resets your database.
@@ -41,7 +42,7 @@ router.route("/")
 
         const requestOptions = {
             method: 'POST',
-            headers: { 'Content-Type': 'application/graphql', 'Authorization': 'Bearer LL7utKGyZOsd7g1xdwfMyFEh80UCmesfPzQ5pfd6VeBexSbUbyRkBuGswVcMsqPFxNGYe7u63HIQWwpoKZuJFWM759wh6RwZZLLZYGEMbFyesMJrugHWrH4_YDdwYXYx', 'Origin': '', 'Accept-Language': 'en_US' },
+            headers: { 'Content-Type': 'application/graphql', 'Authorization': `Bearer ${process.env.API_KEY}`, 'Origin': '', 'Accept-Language': 'en_US' },
             body: payload
         }
 
