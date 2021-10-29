@@ -11,17 +11,20 @@ require('dotenv').config()
 
 
 router.route("/")
-    .post((req, res) => {
-        console.log(`POST /`);
+  .post((req, res) => {
+    console.log(`POST /`);
 
-        const payload = `{
+    const payload = `{
             search(term:"restaurant",
               latitude:${req.body.latitude},
               longitude:${req.body.longitude},
-                   radius:1609) {
+              radius:${req.body.radius},
+              open_now: true,
+              attributes: ["${req.body.attribute}"]) {
               total
               business {
-                  price
+                rating
+                price
                 url
                 name
                 location {
@@ -40,20 +43,18 @@ router.route("/")
             }
           }`
 
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/graphql', 'Authorization': `Bearer ${process.env.API_KEY}`, 'Origin': '', 'Accept-Language': 'en_US' },
-            body: payload
-        }
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/graphql', 'Authorization': `Bearer ${process.env.API_KEY}`, 'Origin': '', 'Accept-Language': 'en_US' },
+      body: payload
+    }
 
-        fetch('https://api.yelp.com/v3/graphql', requestOptions)
-            .then(response => response.json())
-            .then(data => {
-                // setApiData(data);
-                // setLoading(false);
-                res.status(200).send(data)
-            });
+    fetch('https://api.yelp.com/v3/graphql', requestOptions)
+      .then(response => response.json())
+      .then(data => {
+        res.status(200).send(data)
+      });
 
-    });
+  });
 
 module.exports = router;
