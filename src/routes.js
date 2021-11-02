@@ -23,6 +23,7 @@ router.route("/")
               attributes: ["${req.body.attribute}"]) {
               total
               business {
+                distance
                 rating
                 price
                 url
