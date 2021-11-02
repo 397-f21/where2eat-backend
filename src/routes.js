@@ -16,6 +16,7 @@ router.route("/")
 
     const payload = `{
             search(term:"restaurant",
+              limit: 50,
               latitude:${req.body.latitude},
               longitude:${req.body.longitude},
               radius:${req.body.radius},
