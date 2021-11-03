@@ -21,6 +21,7 @@ router.route("/")
               longitude:${req.body.longitude},
               radius:${req.body.radius},
               open_now: true,
+              sort_by: "rating",
               attributes: ["${req.body.attribute}"]) {
               total
               business {
